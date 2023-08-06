@@ -84,7 +84,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET_KEY,
-      callbackURL: `${process.env.REACT_APP_BACKEND_URL}/crm/api/v1/auth/google/callback`,
+      callbackURL: `${process.env.REACT_APP_BACKEND_URL}/mba/api/v1/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {

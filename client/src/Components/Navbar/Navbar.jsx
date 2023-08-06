@@ -141,7 +141,14 @@ const Navbar = () => {
           <Box className="d-flex flex-column justify-content-center align-items-center">
             <Box
               className="d-flex align-items-center px-3 gap-4"
-              sx={{ width: "80%", border: "1px solid black" }}
+              sx={{
+                width: "80%",
+                border: "1px solid black",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                (window.location.href = `${process.env.REACT_APP_BACKEND_API}/mba/api/v1/login/google`)
+              }
             >
               <IconButton
                 size="large"

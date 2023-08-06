@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Navbar/>
       <Routes>
-        <Route exact path="/register" />
+        <Route exact path="/login" />
         <Route exact path="/" element={<Home />} />
       </Routes>
     </Router>
