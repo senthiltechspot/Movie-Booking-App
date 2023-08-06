@@ -167,7 +167,7 @@ exports.googleCallbackSuccess = async (req, res) => {
         code: authorizationCode,
         client_id: process.env.GOOGLE_CLIENT_ID,
         client_secret: process.env.GOOGLE_SECRET_KEY,
-        redirect_uri: `${process.env.REACT_APP_BACKEND_URL}/crm/api/v1/auth/google/callback`,
+        redirect_uri: `${process.env.REACT_APP_BACKEND_URL}/mba/api/v1/auth/google/callback`,
         grant_type: "authorization_code",
       }
     );
@@ -246,41 +246,3 @@ exports.googleCallbackSuccess = async (req, res) => {
   }
 };
 
-// exports.tokenLogin = async (req, res) => {
-//   // Assuming you are sending the token in the request headers as 'Authorization: Bearer <token>'
-//   const token = req.headers.authorization.split(" ")[1];
-
-//   try {
-//     const decodedToken = jwt.verify(token, config.secret);
-
-//     const user = await User.findById({ _id: decodedToken._id });
-
-//     if (!user) {
-//       res.status(400).send({ mesage: "UserId doesn't exists" });
-//       return;
-//     }
-
-//     if (user.userStatus !== constants.userStatus.approved) {
-//       res
-//         .status(403)
-//         .send({ message: "Only Approved users are allowed to login" });
-//       return;
-//     }
-
-//     const token = jwt.sign({ id: user.userId }, config.secret, {
-//       expiresIn: 120000,
-//     });
-
-//     res.status(200).send({
-//       name: user.name,
-//       userId: user.userId,
-//       email: user.email,
-//       userTypes: user.userTypes,
-//       userStatus: user.userStatus,
-//       accessToken: token,
-//       _id: user._id,
-//     });
-//   } catch (error) {
-//     res.status(401).json({ error: "Invalid token" });
-//   }
-// };
