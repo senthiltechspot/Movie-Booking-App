@@ -1,0 +1,12 @@
+.logo-nav {
+  height: 80px;
+  /* width: 100px; */
+}
+@media (max-width: 600px) {
+  .logo-nav {
+    height: 50px;
+  }
+  .searchbar {
+    display: none;
+  }
+}
