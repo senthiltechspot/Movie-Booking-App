@@ -12,9 +12,9 @@ module.exports = function (app) {
   app.post("/mba/api/v1/auth/signin", authControllers.signin);
 
   // Google authentication routes
-  app.get("/crm/api/v1/login/google", authControllers.loginWithGoogle);
+  app.get("/mba/api/v1/login/google", authControllers.loginWithGoogle);
   app.get(
-    "/crm/api/v1/auth/google/callback",
+    "/mba/api/v1/auth/google/callback",
     authControllers.googleCallbackSuccess
   );
 
