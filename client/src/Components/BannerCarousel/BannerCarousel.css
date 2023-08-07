@@ -14,7 +14,7 @@ swiper-container {
 
   swiper-slide img {
     display: block;
-    width: 100%;
+    width: 90vw;
     height: 100%;
     object-fit: cover;
     margin-bottom: 20px;

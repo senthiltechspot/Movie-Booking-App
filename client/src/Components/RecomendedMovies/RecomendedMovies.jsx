@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./RecomendedMovies.css";
 import { getAllMovies } from "../../API/Movies.api";
 import { useNavigate } from "react-router-dom";
+import { Box, LinearProgress } from "@mui/material";
+
 const RecomendedMovies = () => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState(null);
+  const [slidesPerView, setSlidesPerView] = useState(4); // State variable for slides per view
 
   const fetchMovies = async () => {
     try {
@@ -17,16 +20,41 @@ const RecomendedMovies = () => {
 
   useEffect(() => {
     fetchMovies();
+    // Add event listener to handle window resize
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      // Clean up event listener on component unmount
+      window.removeEventListener("resize", handleWindowResize);
+    };
   }, []);
+
+  // Function to handle window resize
+  const handleWindowResize = () => {
+    // Update slides per view based on screen width
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 768) {
+      setSlidesPerView(3); // Set 3 slides per view for mobile screens
+    } else {
+      setSlidesPerView(4); // Set 4 slides per view for larger screens
+    }
+  };
 
   return (
     <div className="container">
-      <h2>Recommeded Movies</h2>
+      <h2>Recommended Movies</h2>
       <br />
+      {!movies && (
+        <div style={{ height: "10vh" }}>
+          <Box className="d-flex flex-column justify-content-center align-items-center">
+            <h4>Loading.... </h4>
+          </Box>
+          <LinearProgress />
+        </div>
+      )}
       <swiper-container
         class="mySwiper"
-        navigation="true"
-        slides-per-view="4"
+        navigation={slidesPerView === 3 ? "false" : "true"}
+        slides-per-view={slidesPerView} // Use the state variable for slides per view
         space-between="30"
         autoplay-delay="2500"
         autoplay-disable-on-interaction="false"

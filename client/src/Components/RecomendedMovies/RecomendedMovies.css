@@ -43,3 +43,19 @@ h4,
 h7 {
   margin-bottom: 0.1rem;
 }
+
+@media screen and (max-width: 768px) {
+  .swiper-container {
+    width: 100%;
+    /* Adjust container styles for mobile */
+  }
+
+  .swiper-slide {
+    width: auto !important;
+    /* Adjust slide styles for mobile */
+  }
+  .poster-img {
+    height: 150px;
+    width: 100px;
+  }
+}

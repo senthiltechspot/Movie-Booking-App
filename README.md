@@ -1,6 +1,11 @@
 # Movie Booking App
 Developed and Deployed MERN Stack Book My Show Clone
 
+[Live Link](https://movie-booking-app-senthiltechspot.vercel.app/) 
+
+`https://movie-booking-app-senthiltechspot.vercel.app/`
+
+
 Technologies Used
 <p align="center">
 

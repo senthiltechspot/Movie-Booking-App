@@ -33,7 +33,7 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    init();// eslint-disable-next-line
+    init(); // eslint-disable-next-line
   }, []);
 
   const proceedPayment = () => {
@@ -56,8 +56,6 @@ const Booking = () => {
     };
 
     const booking = await createBooking(data);
-
-    // const payment = await makePayment();
 
     const paymentSuccess = true;
 

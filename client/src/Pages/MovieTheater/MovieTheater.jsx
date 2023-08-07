@@ -35,7 +35,6 @@ const MovieTheater = () => {
         <Box
           sx={{
             backgroundColor: "rgb(38,52, 72)",
-            // height: "20vh",
             padding: "17px",
           }}
         >

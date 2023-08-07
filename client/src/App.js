@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Four0Four from "./Pages/Four0Four/Four0Four";
 import Login from "./Pages/Auth/Login";
 import MovieDetails from "./Pages/MovieDetails/MovieDetails";
+import Footer from "./Components/Footer/Footer";
 import MovieTheater from "./Pages/MovieTheater/MovieTheater";
 import Booking from "./Pages/Booking/Booking";
 
@@ -23,6 +24,7 @@ function App() {
           element={<Booking />}
         />
       </Routes>
+      <Footer />
     </Router>
   );
 }

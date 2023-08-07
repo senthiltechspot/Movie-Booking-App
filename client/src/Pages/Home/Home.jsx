@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <BannerCarousel />
       <RecomendedMovies />
-      <div className="ad container">
+      <div className="ad">
         <img src={ad} alt="ad-img" className="ad-img" />
       </div>
       <Events />

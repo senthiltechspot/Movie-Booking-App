@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { getMovieById } from "../../API/Movies.api";
 import "./MovieDetails.css";
 import {
@@ -10,6 +10,8 @@ import {
   IconButton,
   Modal,
   Typography,
+  LinearProgress,
+  CircularProgress,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -33,13 +35,14 @@ const MovieDetails = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const fetchMovieDetails = async () => {
+    const movieDetails = await getMovieById(movieId);
+    setMovieDetails(movieDetails.data);
+  };
+
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      const movieDetails = await getMovieById(movieId);
-      setMovieDetails(movieDetails.data);
-    };
-    fetchMovieDetails();
-  }, [movieId]);
+    fetchMovieDetails(); // eslint-disable-next-line
+  }, []);
   return (
     <Box>
       {movieDetails ? (
@@ -58,14 +61,12 @@ const MovieDetails = () => {
             <h4 className="text">
               2h 43m • Action • UA • {movieDetails.releaseDate}
             </h4>
-            <h6 className="text">{movieDetails.language}</h6>
+            <h7 className="text">{movieDetails.language}</h7>
             <Box className="d-flex gap-4">
               <Button
                 sx={{ backgroundColor: "rgb(248, 68, 100)" }}
                 variant="contained"
-                onClick={() => {
-                  navigate(`/BuyTickets/${movieDetails._id}`);
-                }}
+                onClick={() => {navigate(`/BuyTickets/${movieDetails._id}`)}}
               >
                 Book Tickets
               </Button>
@@ -80,16 +81,7 @@ const MovieDetails = () => {
           </Box>
           <Box>
             <h4 className="text">About</h4>
-            <h6 className="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movieDetails.description}</h6>
-            <hr />
-            <h3 className="text">Directed By - {movieDetails.director}</h3>
-            <hr />
-            <h3 className="text">Cast</h3>
-            <ul className="text">
-              {movieDetails.casts.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
+            <h7 className="text">{movieDetails.description}</h7>
           </Box>
           <Modal
             open={open}
@@ -123,28 +115,29 @@ const MovieDetails = () => {
               </Box>
               <br />
               <Box className="d-flex flex-column justify-content-center align-items-center bg-dark">
-                {/* <div
-                  className="bg-dark"
-                  style={{ border: "3px solid black", }}
-                > */}
                 <ReactPlayer
                   url={movieDetails.trailerUrl}
                   controls={true}
                   width="100%"
                   height="70vh"
                 />
-                {/* </div> */}
               </Box>
             </Box>
           </Modal>
         </Box>
       ) : (
-        <></>
+        <>
+          <LinearProgress />
+          <Box
+            className="d-flex flex-column justify-content-center align-items-center"
+            sx={{ height: "80vh" }}
+          >
+            <CircularProgress />
+            <h4>Loading.... Please Wait</h4>
+          </Box>
+        </>
       )}
     </Box>
-    // <div>
-
-    // </div>
   );
 };
 

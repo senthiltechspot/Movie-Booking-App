@@ -1,0 +1,10 @@
+@media screen and (max-width: 768px){
+  .movie-card {
+    /* height: 90vh; */
+    width: 80vw;
+  }
+  .movie-card img {
+    height: 100px;
+    width: 100px;
+  }
+}
