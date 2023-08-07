@@ -1,68 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./RecomendedMovies.css";
+import { getAllMovies } from "../../API/Movies.api";
+import { useNavigate } from "react-router-dom";
 const RecomendedMovies = () => {
-  let movies = [
-    {
-      name: "Jailer",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-    {
-      name: "Jailer1",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-    {
-      name: "Jailer2",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-    {
-      name: "Jailer3",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-    {
-      name: "Jailer4",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-    {
-      name: "Jailer5",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-    {
-      name: "Jailer6",
-      type: "Comedy",
-      likes: "12k",
-      rating: "8/10",
-      imgurl:
-        "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@like_202006280402.png,ox-24,oy-617,ow-29:ote-MjMzLjlLIExpa2Vz,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00331686-cbuauubbzu-portrait.jpg",
-    },
-  ];
+  const navigate = useNavigate();
+  const [movies, setMovies] = useState(null);
+
+  const fetchMovies = async () => {
+    try {
+      const Moviedata = await getAllMovies();
+      console.log(Moviedata);
+      setMovies(Moviedata.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
   return (
     <div className="container">
       <h2>Recommeded Movies</h2>
-      <br/>
+      <br />
       <swiper-container
         class="mySwiper"
         navigation="true"
@@ -74,17 +35,22 @@ const RecomendedMovies = () => {
         autoplay-disable-on-interaction="false"
         // loop="true"
       >
-        {movies.map((item) => (
-          <swiper-slide>
-            <div className="movie-card">
-              <img src={item.imgurl} alt={item.name} />
-              <div className="card-details">
-                <h4>{item.name}</h4>
-                <h7>{item.type}</h7>
+        {movies &&
+          movies.map((item) => (
+            <swiper-slide>
+              <div className="movie-card" onClick={()=>navigate(`/Details/${item._id}`)}>
+                <img
+                  src={item.posterUrl}
+                  alt={item.name}
+                  className="poster-img"
+                />
+                <div className="card-details">
+                  <h4>{item.name}</h4>
+                  <h7>{item.language}</h7>
+                </div>
               </div>
-            </div>
-          </swiper-slide>
-        ))}
+            </swiper-slide>
+          ))}
       </swiper-container>
     </div>
   );

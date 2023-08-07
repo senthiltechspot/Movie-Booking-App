@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TOKEN } from "../utils/constants";
+import { TOKEN } from "../Utils/constants";
 
 const BASE_URL = process.env.REACT_APP_BACKEND_API;
 
@@ -27,7 +27,7 @@ export const getMovieById = async (id) => {
 
     return res;
   } catch (err) {
-    throw new Error("internal Error");
+    // throw new Error("internal Error");
     console.log(err);
   }
 };

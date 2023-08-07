@@ -1,0 +1,27 @@
+.MovieDetails-Card {
+  width: 100%;
+  /* height: 100vh; */
+  background: linear-gradient(
+    90deg,
+    rgba(74, 73, 97, 1) 0%,
+    rgba(110, 110, 120, 1) 25%,
+    rgba(39, 39, 94, 1) 100%
+  );
+  padding: 30px;
+}
+
+.Detailsposter-img {
+  height: 450px;
+  width: 300px;
+}
+
+.Detailsposter-img > img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+
+.text {
+  color: white;
+  font-weight: bolder;
+}

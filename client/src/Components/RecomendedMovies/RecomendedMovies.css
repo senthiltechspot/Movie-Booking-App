@@ -26,7 +26,12 @@ swiper-slide img {
   border-radius: 7px;
   margin-bottom: 5px;
 }
-
+.movie-card {
+  cursor: pointer;
+}
+.poster-img {
+  height: 300px;
+}
 .card-details {
   /* padding: 10px; */
   display: flex;

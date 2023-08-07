@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Movie Booking Application");
 });
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log(`Application running on port 8000`);
 });
 

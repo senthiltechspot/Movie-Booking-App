@@ -12,6 +12,10 @@ import GoogleIcon from "@mui/icons-material/Google";
 import Logo from "../../Assets/logo.png";
 import { Button, Modal, Typography } from "@mui/material";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import validateToken from "../../Utils/ToeknValidator";
+import HandleLogOut from "../../Handlers/HandleLogout";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -70,14 +74,30 @@ const style = {
 };
 
 const Navbar = () => {
+  const [isLogged, setisLogged] = useState(false);
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  React.useEffect(() => {
+    const { valid, expired } = validateToken();
+    if (valid === true && expired === false) {
+      setisLogged(true);
+    }
+  }, [setisLogged]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "rgb(43, 49, 72)" }}>
         <Toolbar className="d-flex justify-content-between">
-          <img className="logo-nav" src={Logo} alt="logo" />
+          <img
+            className="logo-nav"
+            src={Logo}
+            alt="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
           <Search className="searchbar">
             <SearchIconWrapper>
               <SearchIcon />
@@ -88,13 +108,27 @@ const Navbar = () => {
             />
           </Search>
           <Box>
-            <Button
-              sx={{ backgroundColor: "rgb(248, 68, 100)" }}
-              variant="contained"
-              onClick={handleOpen}
-            >
-              Sign In
-            </Button>
+            {isLogged ? (
+              <Button
+                sx={{ backgroundColor: "rgb(248, 68, 100)" }}
+                variant="contained"
+                onClick={() => {
+                  HandleLogOut();
+                  setisLogged(false);
+                }}
+              >
+                Sign Out
+              </Button>
+            ) : (
+              <Button
+                sx={{ backgroundColor: "rgb(248, 68, 100)" }}
+                variant="contained"
+                onClick={handleOpen}
+              >
+                Sign In
+              </Button>
+            )}
+
             <IconButton
               size="large"
               edge="start"

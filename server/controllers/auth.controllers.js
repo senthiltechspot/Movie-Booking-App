@@ -123,6 +123,7 @@ passport.use(
           user = await User.create(userObject);
           const { subject, html, text } = userRegistration(user);
           const CreatedUser = {
+            id: user.userId,
             name: user.name,
             userId: user.userId,
             email: user.email,
@@ -212,6 +213,7 @@ exports.googleCallbackSuccess = async (req, res) => {
         userTypes: newUser.userTypes,
         userStatus: newUser.userStatus,
         _id: newUser._id,
+        id: newUser.userId,
       };
       const token = jwt.sign(CreatedUser, config.secret, {
         expiresIn: 120000,
@@ -225,6 +227,7 @@ exports.googleCallbackSuccess = async (req, res) => {
       const token = jwt.sign(
         {
           name: user.name,
+          id: user.userId,
           userId: user.userId,
           email: user.email,
           userTypes: user.userTypes,
@@ -245,4 +248,3 @@ exports.googleCallbackSuccess = async (req, res) => {
     res.redirect(`${process.env.REACT_APP_FRONTEND_URL}/login?error=true`);
   }
 };
-
