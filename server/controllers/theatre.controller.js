@@ -8,7 +8,8 @@ exports.createTheatre =  async (req,res)=>{
         name:req.body.name,
         city:req.body.city,
         description:req.body.description,
-        pinCode:req.body.pinCode
+        pinCode:req.body.pinCode,
+        ownerId:req.body.ownerId
     }
 
     const theatre = await Theatre.create(theatreObject);

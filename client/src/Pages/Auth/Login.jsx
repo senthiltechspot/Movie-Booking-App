@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import validateToken from "../../Utils/ToeknValidator";
-import { Box, LinearProgress } from "@mui/material";
+import { Box, CircularProgress, LinearProgress } from "@mui/material";
 
 const Login = () => {
   useEffect(() => {
@@ -41,9 +41,10 @@ const Login = () => {
     <div>
       <LinearProgress />
       <Box
-        className="d-flex justify-content-center align-items-center"
+        className="d-flex flex-column justify-content-center align-items-center"
         sx={{ height: "80vh" }}
       >
+        <CircularProgress />
         Logging You In.... Please Wait
       </Box>
     </div>

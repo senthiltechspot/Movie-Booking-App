@@ -28,16 +28,11 @@ const Events = () => {
       <swiper-container
         class="mySwiper"
         navigation="true"
-        // pagination="true"
-        // pagination-clickable="true"
         slides-per-view="4"
         space-between="30"
-        //   autoplay-delay="2500"
-        //   autoplay-disable-on-interaction="false"
-        // loop="true"
       >
-        {events.map((item) => (
-          <swiper-slide>
+        {events.map((item, i) => (
+          <swiper-slide key={i}>
             <div className="movie-card">
               <img src={item.imgurl} alt={item.name} />
             </div>

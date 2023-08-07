@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMovieById } from "../../API/Movies.api";
 import "./MovieDetails.css";
 import {
@@ -26,20 +26,20 @@ const style = {
 };
 
 const MovieDetails = () => {
+  const navigate = useNavigate();
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const fetchMovieDetails = async () => {
-    const movieDetails = await getMovieById(movieId);
-    setMovieDetails(movieDetails.data);
-  };
-
   useEffect(() => {
+    const fetchMovieDetails = async () => {
+      const movieDetails = await getMovieById(movieId);
+      setMovieDetails(movieDetails.data);
+    };
     fetchMovieDetails();
-  }, []);
+  }, [movieId]);
   return (
     <Box>
       {movieDetails ? (
@@ -58,12 +58,14 @@ const MovieDetails = () => {
             <h4 className="text">
               2h 43m • Action • UA • {movieDetails.releaseDate}
             </h4>
-            <h7 className="text">{movieDetails.language}</h7>
+            <h6 className="text">{movieDetails.language}</h6>
             <Box className="d-flex gap-4">
               <Button
                 sx={{ backgroundColor: "rgb(248, 68, 100)" }}
                 variant="contained"
-                onClick={() => {}}
+                onClick={() => {
+                  navigate(`/BuyTickets/${movieDetails._id}`);
+                }}
               >
                 Book Tickets
               </Button>
@@ -78,7 +80,16 @@ const MovieDetails = () => {
           </Box>
           <Box>
             <h4 className="text">About</h4>
-            <h7 className="text">{movieDetails.description}</h7>
+            <h6 className="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{movieDetails.description}</h6>
+            <hr />
+            <h3 className="text">Directed By - {movieDetails.director}</h3>
+            <hr />
+            <h3 className="text">Cast</h3>
+            <ul className="text">
+              {movieDetails.casts.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
           </Box>
           <Modal
             open={open}

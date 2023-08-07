@@ -9,7 +9,6 @@ const RecomendedMovies = () => {
   const fetchMovies = async () => {
     try {
       const Moviedata = await getAllMovies();
-      console.log(Moviedata);
       setMovies(Moviedata.data);
     } catch (e) {
       console.log(e);
@@ -27,18 +26,18 @@ const RecomendedMovies = () => {
       <swiper-container
         class="mySwiper"
         navigation="true"
-        // pagination="true"
-        // pagination-clickable="true"
         slides-per-view="4"
         space-between="30"
         autoplay-delay="2500"
         autoplay-disable-on-interaction="false"
-        // loop="true"
       >
         {movies &&
-          movies.map((item) => (
-            <swiper-slide>
-              <div className="movie-card" onClick={()=>navigate(`/Details/${item._id}`)}>
+          movies.map((item, i) => (
+            <swiper-slide key={i}>
+              <div
+                className="movie-card"
+                onClick={() => navigate(`/Details/${item._id}`)}
+              >
                 <img
                   src={item.posterUrl}
                   alt={item.name}
@@ -46,7 +45,7 @@ const RecomendedMovies = () => {
                 />
                 <div className="card-details">
                   <h4>{item.name}</h4>
-                  <h7>{item.language}</h7>
+                  <h6>{item.language}</h6>
                 </div>
               </div>
             </swiper-slide>
