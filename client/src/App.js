@@ -7,6 +7,7 @@ import MovieDetails from "./Pages/MovieDetails/MovieDetails";
 import Footer from "./Components/Footer/Footer";
 import MovieTheater from "./Pages/MovieTheater/MovieTheater";
 import Booking from "./Pages/Booking/Booking";
+import Orders from "./Pages/Orders/Orders";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           path="/buyTickets/:movieId/:theatreId"
           element={<Booking />}
         />
+        <Route exact path="/Orders" element={<Orders />} />
       </Routes>
       <Footer />
     </Router>

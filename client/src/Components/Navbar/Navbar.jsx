@@ -10,12 +10,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import GoogleIcon from "@mui/icons-material/Google";
 import Logo from "../../Assets/logo.png";
-import { Button, Modal, Typography } from "@mui/material";
+import { Button, Drawer, Modal, Typography } from "@mui/material";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import validateToken from "../../Utils/ToeknValidator";
 import HandleLogOut from "../../Handlers/HandleLogout";
+import DrawerItems from "./Drawer/DrawerItems";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -77,6 +78,7 @@ const Navbar = () => {
   const [isLogged, setisLogged] = useState(false);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [state, setState] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -129,15 +131,18 @@ const Navbar = () => {
               </Button>
             )}
 
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2, ml: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
+            {isLogged && (
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                sx={{ mr: 2, ml: 2 }}
+                onClick={() => setState(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -211,6 +216,11 @@ const Navbar = () => {
           </Box>
         </Box>
       </Modal>
+      <React.Fragment>
+        <Drawer anchor={"right"} open={state} onClose={() => setState(false)}>
+          <DrawerItems HandleLogOut={HandleLogOut} setisLogged={setisLogged} />
+        </Drawer>
+      </React.Fragment>
     </Box>
   );
 };

@@ -61,7 +61,7 @@ const MovieDetails = () => {
             <h4 className="text">
               2h 43m • Action • UA • {movieDetails.releaseDate}
             </h4>
-            <h7 className="text">{movieDetails.language}</h7>
+            <h6 className="text">{movieDetails.language}</h6>
             <Box className="d-flex gap-4">
               <Button
                 sx={{ backgroundColor: "rgb(248, 68, 100)" }}
@@ -81,7 +81,7 @@ const MovieDetails = () => {
           </Box>
           <Box>
             <h4 className="text">About</h4>
-            <h7 className="text">{movieDetails.description}</h7>
+            <h6 className="text">{movieDetails.description}</h6>
           </Box>
           <Modal
             open={open}

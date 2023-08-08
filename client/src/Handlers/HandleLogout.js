@@ -5,8 +5,6 @@ const HandleLogOut = () => {
     localStorage.removeItem('name')
     localStorage.removeItem('email')
     localStorage.removeItem('userType')
-
-
     return;
 };
 

@@ -57,8 +57,8 @@ const Events = () => {
         autoplay-disable-on-interaction="false"
         // loop="true"
       >
-        {events.map((item) => (
-          <swiper-slide>
+        {events.map((item, i) => (
+          <swiper-slide key={i}>
             <div className="movie-card">
               <img src={item.imgurl} alt={item.name} />
             </div>
