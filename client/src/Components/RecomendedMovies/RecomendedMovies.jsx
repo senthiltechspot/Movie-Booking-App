@@ -32,15 +32,15 @@ const RecomendedMovies = () => {
   const handleWindowResize = () => {
     // Update slides per view based on screen width
     const screenWidth = window.innerWidth;
-    if (screenWidth <= 768) {
-      setSlidesPerView(3); // Set 3 slides per view for mobile screens
+    if (screenWidth < 768) {
+      setSlidesPerView(2); // Set 3 slides per view for mobile screens
     } else {
       setSlidesPerView(4); // Set 4 slides per view for larger screens
     }
   };
 
   return (
-    <div className="container">
+    <div className="p-3">
       <h2>Recommended Movies</h2>
       <br />
       {!movies && (
@@ -53,9 +53,9 @@ const RecomendedMovies = () => {
       )}
       <swiper-container
         class="mySwiper"
-        navigation={slidesPerView === 3 ? "false" : "true"}
+        navigation={slidesPerView === 2 ? "false" : "true"}
         slides-per-view={slidesPerView} // Use the state variable for slides per view
-        space-between="30"
+        space-between="10"
         autoplay-delay="2500"
         autoplay-disable-on-interaction="false"
       >

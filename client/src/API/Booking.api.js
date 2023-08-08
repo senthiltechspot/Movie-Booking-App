@@ -33,3 +33,24 @@ export const createBooking = async (bookingRequest) => {
     console.log(err);
   }
 };
+
+export const cancelBooking = async (id) => {
+  const headers = {
+    "x-access-token": localStorage.getItem(TOKEN),
+  };
+
+  try {
+    const res = await axios.put(
+      `${BASE_URL}/mba/api/v1/bookings/${id}/cancel`,
+      {},
+      {
+        headers: headers,
+      }
+    );
+    return res;
+  } catch (error) {
+    // Handle error
+    console.error(error);
+    throw error; // Rethrow the error to the caller
+  }
+};

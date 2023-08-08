@@ -8,10 +8,24 @@ import Footer from "./Components/Footer/Footer";
 import MovieTheater from "./Pages/MovieTheater/MovieTheater";
 import Booking from "./Pages/Booking/Booking";
 import Orders from "./Pages/Orders/Orders";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <Router>
+      <ToastContainer
+        autoClose={3000}
+        position="top-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Navbar />
       <Routes>
         <Route exact path="/login" element={<Login />} />
@@ -27,6 +41,7 @@ function App() {
         <Route exact path="/Orders" element={<Orders />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </Router>
   );
 }
