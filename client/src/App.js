@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Navbar from "./Components/Navbar/Navbar";
 import Four0Four from "./Pages/Four0Four/Four0Four";
@@ -9,9 +9,17 @@ import MovieTheater from "./Pages/MovieTheater/MovieTheater";
 import Booking from "./Pages/Booking/Booking";
 import Orders from "./Pages/Orders/Orders";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import validateToken from "./Utils/ToeknValidator";
 
 function App() {
+  const { valid, expired } = validateToken();
+  const ProtectedRoute = ({ children }) => {
+    if (valid === false && (expired === false || true)) {
+      return <Navigate to={`/login`} replace />;
+    }
+    return children;
+  };
   return (
     <Router>
       <ToastContainer
@@ -36,9 +44,21 @@ function App() {
         <Route
           exact
           path="/buyTickets/:movieId/:theatreId"
-          element={<Booking />}
+          element={
+            <ProtectedRoute>
+              <Booking />
+            </ProtectedRoute>
+          }
         />
-        <Route exact path="/Orders" element={<Orders />} />
+        <Route
+          exact
+          path="/Orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <Footer />
       <ToastContainer />

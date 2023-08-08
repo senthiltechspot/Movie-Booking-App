@@ -33,7 +33,7 @@ const RecomendedMovies = () => {
     // Update slides per view based on screen width
     const screenWidth = window.innerWidth;
     if (screenWidth < 768) {
-      setSlidesPerView(2); // Set 3 slides per view for mobile screens
+      setSlidesPerView(3); // Set 3 slides per view for mobile screens
     } else {
       setSlidesPerView(4); // Set 4 slides per view for larger screens
     }
@@ -53,7 +53,7 @@ const RecomendedMovies = () => {
       )}
       <swiper-container
         class="mySwiper"
-        navigation={slidesPerView === 2 ? "false" : "true"}
+        navigation={slidesPerView === 3 ? "false" : "true"}
         slides-per-view={slidesPerView} // Use the state variable for slides per view
         space-between="10"
         autoplay-delay="2500"

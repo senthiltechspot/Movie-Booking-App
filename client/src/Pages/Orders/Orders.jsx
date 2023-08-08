@@ -25,7 +25,6 @@ const Orders = () => {
   useEffect(() => {
     fetchBookings();
   }, []);
-  console.log(Bookings);
   const HandleCancelBooking = async (id) => {
     const promise = cancelBooking(id);
 
@@ -87,9 +86,7 @@ const Orders = () => {
                 height="250"
                 image={item.movieId.posterUrl}
               />
-              <CardContent
-                className="d-flex flex-column justify-content-center p-4"
-              >
+              <CardContent className="d-flex flex-column justify-content-center p-4">
                 <Typography gutterBottom variant="h6" component="h6">
                   {item.movieId.name} - {item.movieId.language}
                 </Typography>
@@ -111,7 +108,7 @@ const Orders = () => {
               </CardContent>
               <CardActions
                 className="d-flex align-items-center  justify-content-center flex-wrap gap-3 pb-3"
-                sx={isMobile && { width: "100%" }}
+                sx={isMobile ? { width: "100%" } : {}}
               >
                 <Chip
                   label={item.status}

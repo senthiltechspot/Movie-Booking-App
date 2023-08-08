@@ -15,7 +15,6 @@ swiper-slide {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
 }
 
 swiper-slide img {
