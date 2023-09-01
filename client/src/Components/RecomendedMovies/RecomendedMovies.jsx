@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./RecomendedMovies.css";
 import { getAllMovies } from "../../API/Movies.api";
 import { useNavigate } from "react-router-dom";
-import { Box, LinearProgress } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 
 const RecomendedMovies = () => {
   const navigate = useNavigate();
@@ -44,11 +44,40 @@ const RecomendedMovies = () => {
       <h2>Recommended Movies</h2>
       <br />
       {!movies && (
-        <div style={{ height: "10vh" }}>
-          <Box className="d-flex flex-column justify-content-center align-items-center">
-            <h4>Loading.... </h4>
-          </Box>
-          <LinearProgress />
+        <div>
+          {/* <LinearProgress /> */}
+          <swiper-container
+            class="mySwiper"
+            navigation={slidesPerView === 3 ? "false" : "true"}
+            slides-per-view={slidesPerView} // Use the state variable for slides per view
+            space-between="10"
+            autoplay-delay="2500"
+            autoplay-disable-on-interaction="false"
+          >
+            {Array.from({ length: slidesPerView }, (_, index) => (
+              <swiper-slide key={index}>
+                <div className="movie-card">
+                  <Skeleton
+                    variant="rectangular"
+                    width={slidesPerView === 3 ? "100px" : "250px"}
+                    height={slidesPerView === 3 ? "150px" : "300px"}
+                    animation="wave"
+                    className="rounded-3"
+                  />
+                  <Box
+                    sx={
+                      slidesPerView === 3
+                        ? { width: "100px" }
+                        : { width: "250px" }
+                    }
+                  >
+                    <Skeleton animation="wave" />
+                    <Skeleton animation="wave" />
+                  </Box>
+                </div>
+              </swiper-slide>
+            ))}
+          </swiper-container>
         </div>
       )}
       <swiper-container
